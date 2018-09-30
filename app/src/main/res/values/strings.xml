@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MyMotivation</string>
+    <string name="goals">Goals</string>
+    <string name="favorites">Favorites</string>
+    <string name="tape">Tape</string>
+
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <string name="empty_goals_fragment">You have not created goals</string>
+
+    <string name="nav_important">Important</string>
+    <string name="nav_new">New</string>
+</resources>

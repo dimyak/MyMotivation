@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bnv_goals"
+        android:icon="@drawable/menu_goal"
+        android:title="@string/goals"/>
+    <item
+        android:id="@+id/bnv_tape"
+        android:icon="@drawable/menu_tape"
+        android:title="@string/tape"/>
+    <item
+        android:id="@+id/bnv_favorites"
+        android:icon="@drawable/menu_favorites"
+        android:title="@string/favorites"/>
+
+</menu>
