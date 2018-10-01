@@ -10,54 +10,34 @@ import android.util.Log
 import android.view.*
 import com.example.keshl.mymotivation.R
 import com.example.keshl.mymotivation.presentation.MainActivity
+import com.example.keshl.mymotivation.presentation.common.BaseFragment
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import javax.inject.Inject
 
-class CreateGoalFragment : Fragment(), CreateGoalContract.View {
+class CreateGoalFragment : BaseFragment(), CreateGoalContract.View {
 
     private lateinit var actionBar: ActionBar
     @Inject
     lateinit var mPresenter: CreateGoalContract.Presenter
 
 
-    companion object {
-        fun newInstance(): CreateGoalFragment {
-            val args = Bundle()
-            val fragment = CreateGoalFragment()
-            fragment.arguments = args
-            return fragment
-        }
-    }
-
-
-    override fun onAttach(context: Context?) {
-        AndroidSupportInjection.inject(this)
-        super.onAttach(context)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_create_goal, container, false)
-        mPresenter.onCreate(this)
-
-
+        mPresenter.onCreateView(this)
         return view
     }
 
-    override fun onResume() {
-        super.onResume()
-        setupToolbar()
-        setupFAB()
-    }
 
     override fun onDestroy() {
-        super.onDestroy()
         actionBar.setHomeButtonEnabled(false)
+        mPresenter.onDestroy()
+        super.onDestroy()
     }
 
     @SuppressLint("RestrictedApi")
-    private fun setupFAB() {
+    override fun setupFAB() {
         var fab: FloatingActionButton = activity!!.fab
         fab.visibility = View.VISIBLE
         fab.setImageResource(R.drawable.ic_save_white)
@@ -67,7 +47,7 @@ class CreateGoalFragment : Fragment(), CreateGoalContract.View {
         }
     }
 
-    private fun setupToolbar() {
+    override fun setupToolbar() {
         setHasOptionsMenu(true)
         actionBar = (activity as MainActivity).supportActionBar!!
         actionBar.setTitle(R.string.create_new_goal)
@@ -81,6 +61,15 @@ class CreateGoalFragment : Fragment(), CreateGoalContract.View {
             activity!!.onBackPressed()
         }
         return true
+    }
+
+    companion object {
+        fun newInstance(): CreateGoalFragment {
+            val args = Bundle()
+            val fragment = CreateGoalFragment()
+            fragment.arguments = args
+            return fragment
+        }
     }
 
 }

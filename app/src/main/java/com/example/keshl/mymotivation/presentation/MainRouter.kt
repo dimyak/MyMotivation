@@ -3,6 +3,7 @@ package com.example.keshl.mymotivation.presentation
 import android.annotation.SuppressLint
 import android.opengl.Visibility
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
@@ -18,15 +19,21 @@ import javax.inject.Inject
 @ActivityScope
 class MainRouter : GoalsContract.Router,
         CreateGoalContract.Router {
+    private val mActivity:MainActivity
 
-
-
-    private val mActivity:AppCompatActivity
     private lateinit var mCurrentFragment:Fragment
 
+
     @Inject
-    constructor(appCompatActivity: AppCompatActivity){
+    constructor(appCompatActivity: MainActivity){
         mActivity = appCompatActivity
+    }
+    override fun showBottomNavigation() {
+        mActivity.showBottomNavigation()
+    }
+
+    override fun hideBottomNavigation() {
+        mActivity.hideBottomNavigation()
     }
 
     override fun navigateToCreateGoalFragment() {
@@ -36,11 +43,18 @@ class MainRouter : GoalsContract.Router,
 
 
     fun navigateToGoalsFragment(){
+        clearBackStack()
         replaceWithoutBackStack(GoalsFragment.newInstance())
     }
 
     private fun setCurrentFragment(fragment: Fragment) {
         mCurrentFragment = fragment
+    }
+
+    private fun clearBackStack() {
+        val fm:FragmentManager  = mActivity.supportFragmentManager
+        for (i in 0..fm.backStackEntryCount)
+            fm.popBackStack()
     }
 
 

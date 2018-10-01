@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     lateinit var mAndroidInjector: DispatchingAndroidInjector<Fragment>
 
 
-
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
         return mAndroidInjector
     }
@@ -38,21 +37,23 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         setContentView(R.layout.activity_main)
         mMainRouter.navigateToGoalsFragment()
         setSupportActionBar(toolbar)
-        //initView()
+        initView()
 
     }
 
     private fun initView() {
+        initDrawer()
+        initBottomMenu()
+    }
+
+    private fun initDrawer() {
         val drawerToggle: ActionBarDrawerToggle = object : ActionBarDrawerToggle(
                 this,
                 drawer_layout,
                 toolbar,
                 R.string.drawer_open,
                 R.string.drawer_close
-        ){
-
-        }
-
+        ) {}
 
         // Configure the drawer layout to add listener and show icon on toolbar
         drawerToggle.isDrawerIndicatorEnabled = true
@@ -60,9 +61,30 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         drawerToggle.syncState()
     }
 
+    private fun initBottomMenu() {
+        bottom_navigation.setOnNavigationItemSelectedListener {
+            var result: Boolean
+            when (it.itemId) {
+                R.id.bnv_goals -> {
+                    mMainRouter.navigateToGoalsFragment()
+                    result = true
+                }
+                else-> result = false
+            }
+            result
 
+        }
+    }
 
+    fun hideBottomNavigation() {
+        val bottomTranslation = appBarBottom.translationY + appBarBottom.height
+        appBarBottom.animate().translationY(bottomTranslation)
+    }
 
+    fun showBottomNavigation() {
+        val bottomTranslation = appBarBottom.translationY - appBarBottom.height
+        appBarBottom.animate().translationY(bottomTranslation)
+    }
 
 
 }

@@ -1,15 +1,13 @@
 package com.example.keshl.mymotivation.presentation.goal
 
+import com.example.keshl.mymotivation.presentation.common.BasePresenter
+
 interface GoalsContract {
 
     interface View
 
-    interface Presenter {
-
-        fun onCreate(view: GoalsFragment)
-        fun onDestroi()
+    interface Presenter: BasePresenter<View> {
         fun createNewGoal()
-
     }
 
     interface EvenDelegate

@@ -10,52 +10,35 @@ import android.util.Log
 import android.view.*
 import com.example.keshl.mymotivation.R
 import com.example.keshl.mymotivation.presentation.MainActivity
+import com.example.keshl.mymotivation.presentation.common.BaseFragment
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.app_bar_main.view.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.act
 import javax.inject.Inject
 
-class GoalsFragment : Fragment(), GoalsContract.View {
+class GoalsFragment : BaseFragment(), GoalsContract.View {
 
     private lateinit var actionBar: ActionBar
     @Inject
     lateinit var mPresenter: GoalsContract.Presenter
 
 
-
-    companion object {
-        fun newInstance(): GoalsFragment {
-            val args = Bundle()
-            val fragment = GoalsFragment()
-            fragment.arguments = args
-            return fragment
-        }
-    }
-
-
-    override fun onAttach(context: Context?) {
-        AndroidSupportInjection.inject(this)
-        super.onAttach(context)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_goals, container, false)
-        mPresenter.onCreate(this)
-
-
-
+        mPresenter.onCreateView(this)
         return view
     }
 
-    override fun onResume() {
-        super.onResume()
-        setupToolbar()
-        setupFAB()
+    override fun onDestroy() {
+        mPresenter.onDestroy()
+        super.onDestroy()
     }
 
+
+
     @SuppressLint("RestrictedApi")
-    private fun setupFAB() {
+    override fun setupFAB() {
         var fab: FloatingActionButton = activity!!.fab
         fab.visibility = View.VISIBLE
         fab.setImageResource(R.drawable.ic_add_white)
@@ -65,7 +48,7 @@ class GoalsFragment : Fragment(), GoalsContract.View {
         }
     }
 
-    private fun setupToolbar() {
+    override fun setupToolbar() {
         setHasOptionsMenu(true)
         actionBar = (activity as MainActivity).supportActionBar!!
         actionBar.setTitle(R.string.goals)
@@ -80,6 +63,15 @@ class GoalsFragment : Fragment(), GoalsContract.View {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         Log.d("TEST", "MENU GOALS FRAGMENT")
         return true
+    }
+
+    companion object {
+        fun newInstance(): GoalsFragment {
+            val args = Bundle()
+            val fragment = GoalsFragment()
+            fragment.arguments = args
+            return fragment
+        }
     }
 
 

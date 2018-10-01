@@ -1,32 +1,23 @@
 package com.example.keshl.mymotivation.presentation.goal
 
-import android.util.Log
-import android.view.MenuItem
-import android.view.View
-import com.example.keshl.mymotivation.R
 import javax.inject.Inject
 
-class GoalsPresenter : GoalsContract.Presenter, GoalsContract.Router, GoalsContract.EvenDelegate  {
+class GoalsPresenter : GoalsContract.Presenter, GoalsContract.Router, GoalsContract.EvenDelegate {
 
-
-
-
-    lateinit var mRouter: GoalsContract.Router
+    private lateinit var mView: GoalsContract.View
+    private val mRouter: GoalsContract.Router
 
     @Inject
     constructor(router: GoalsContract.Router) {
         mRouter = router
     }
 
-    lateinit var mView: GoalsContract.View
 
-    override fun onCreate(view: GoalsFragment) {
-        mView = view
-
-
+    override fun onCreateView(v: GoalsContract.View) {
+        mView = v
     }
 
-    override fun onDestroi() {
+    override fun onDestroy() {
 
     }
 
@@ -37,7 +28,6 @@ class GoalsPresenter : GoalsContract.Presenter, GoalsContract.Router, GoalsContr
     override fun navigateToCreateGoalFragment() {
         mRouter.navigateToCreateGoalFragment()
     }
-
 
 
 }
