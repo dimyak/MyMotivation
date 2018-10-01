@@ -8,26 +8,18 @@ import android.util.Log
 import android.view.View
 import com.example.keshl.mymotivation.R
 import com.example.keshl.mymotivation.di.activity.ActivityScope
+import com.example.keshl.mymotivation.presentation.creategoal.CreateGoalContract
+import com.example.keshl.mymotivation.presentation.creategoal.CreateGoalFragment
 import com.example.keshl.mymotivation.presentation.goal.GoalsContract
 import com.example.keshl.mymotivation.presentation.goal.GoalsFragment
 import kotlinx.android.synthetic.main.content_main.*
 import javax.inject.Inject
 
 @ActivityScope
-class MainRouter : GoalsContract.Router{
-    @SuppressLint("RestrictedApi")
-    override fun setGoalFAB(delegate:GoalsContract.EvenDelegate) {
-        mActivity.fab.setImageResource(R.drawable.ic_add_white)
-        mActivity.fab.visibility = View.VISIBLE
-        mActivity.fab.setOnClickListener(delegate)
+class MainRouter : GoalsContract.Router,
+        CreateGoalContract.Router {
 
-        setGoalToolBarMenu(delegate)
-    }
 
-    private fun setGoalToolBarMenu(delegate:GoalsContract.EvenDelegate){
-        mActivity.toolbar.inflateMenu(R.menu.goal_fragment_menu)
-        mActivity.toolbar.setOnMenuItemClickListener(delegate)
-    }
 
     private val mActivity:AppCompatActivity
     private lateinit var mCurrentFragment:Fragment
@@ -36,6 +28,11 @@ class MainRouter : GoalsContract.Router{
     constructor(appCompatActivity: AppCompatActivity){
         mActivity = appCompatActivity
     }
+
+    override fun navigateToCreateGoalFragment() {
+        replaceWithBackStack(CreateGoalFragment.newInstance())
+    }
+
 
 
     fun navigateToGoalsFragment(){
@@ -46,12 +43,23 @@ class MainRouter : GoalsContract.Router{
         mCurrentFragment = fragment
     }
 
+
     private fun replaceWithoutBackStack(fragment: Fragment) {
         setCurrentFragment(fragment)
 
         mActivity.supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.mainContainer, fragment)
+                .replace(R.id.mainContainer, fragment, fragment.javaClass.simpleName)
+                .commit()
+    }
+
+    private fun replaceWithBackStack(fragment: Fragment) {
+        setCurrentFragment(fragment)
+
+        mActivity.supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.mainContainer, fragment, fragment.javaClass.simpleName)
+                .addToBackStack(fragment.javaClass.simpleName)
                 .commit()
     }
 }

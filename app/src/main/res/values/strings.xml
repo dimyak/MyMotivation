@@ -3,12 +3,19 @@
     <string name="goals">Goals</string>
     <string name="favorites">Favorites</string>
     <string name="tape">Tape</string>
+    <string name="create_new_goal">Create new goal</string>
 
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
     <string name="empty_goals_fragment">You have not created goals</string>
+
+    <string name="goal_title">Title</string>
+    <string name="goal_description">Description</string>
+    <string name="type_og_goal">Types of goal </string>
+    <string name="goal_type_time">Time</string>
+    <string name="goal_type_progress">Progress</string>
 
     <string name="nav_important">Important</string>
     <string name="nav_new">New</string>

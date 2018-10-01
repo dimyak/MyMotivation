@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import com.example.keshl.mymotivation.ACTIVITY_CONTEXT
 import com.example.keshl.mymotivation.presentation.MainActivity
+import com.example.keshl.mymotivation.presentation.creategoal.CreateGoalFragment
+import com.example.keshl.mymotivation.presentation.creategoal.CreateGoalFragmentComponent
 import com.example.keshl.mymotivation.presentation.goal.GoalsFragment
 import com.example.keshl.mymotivation.presentation.goal.GoalsFragmentComponent
 import dagger.Binds
@@ -26,9 +28,7 @@ import javax.inject.Named
 interface MainActivityComponent : AndroidInjector<MainActivity> {
 
     @Subcomponent.Builder
-    abstract class Builder : AndroidInjector.Builder<MainActivity>() {
-
-    }
+    abstract class Builder : AndroidInjector.Builder<MainActivity>()
 
     @Module
     class ActivityModule {
@@ -47,12 +47,18 @@ interface MainActivityComponent : AndroidInjector<MainActivity> {
         }
     }
 
-    @Module(subcomponents = arrayOf(GoalsFragmentComponent::class))
+    @Module(subcomponents = arrayOf(GoalsFragmentComponent::class,
+            CreateGoalFragmentComponent::class))
     interface FragmentBindingModule{
         @Binds
         @IntoMap
         @FragmentKey(GoalsFragment::class)
         fun providGoalFragmentComponentBuilder(builder: GoalsFragmentComponent.Builder): AndroidInjector.Factory<out Fragment>
+
+        @Binds
+        @IntoMap
+        @FragmentKey(CreateGoalFragment::class)
+        fun providCreateGoalFragmentComponentBuilder(builder: CreateGoalFragmentComponent.Builder): AndroidInjector.Factory<out Fragment>
 
     }
 

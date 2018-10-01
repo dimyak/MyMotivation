@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mMainRouter.navigateToGoalsFragment()
-
-        initView()
+        setSupportActionBar(toolbar)
+        //initView()
 
     }
 
@@ -50,15 +50,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 R.string.drawer_open,
                 R.string.drawer_close
         ){
-            override fun onDrawerClosed(view: View){
-                super.onDrawerClosed(view)
-                //toast("Drawer closed")
-            }
 
-            override fun onDrawerOpened(drawerView: View){
-                super.onDrawerOpened(drawerView)
-                //toast("Drawer opened")
-            }
         }
 
 
