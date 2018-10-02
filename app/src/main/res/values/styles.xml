@@ -8,11 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
     <style name="TextCreate">
         <item name="android:textSize">18sp</item>
         <item name="android:textAllCaps">false</item>
     </style>
-
     <style name="TextCreateItem">
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">false</item>

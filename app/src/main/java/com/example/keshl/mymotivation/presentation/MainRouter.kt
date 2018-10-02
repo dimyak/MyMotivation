@@ -72,6 +72,7 @@ class MainRouter : GoalsContract.Router,
 
         mActivity.supportFragmentManager
                 .beginTransaction()
+                .setCustomAnimations(R.anim.fragment_slide_enter, R.anim.fragment_slide_exit, R.anim.fragment_slide_pop_enter, R.anim.fragment_slide_pop_exit)
                 .replace(R.id.mainContainer, fragment, fragment.javaClass.simpleName)
                 .addToBackStack(fragment.javaClass.simpleName)
                 .commit()

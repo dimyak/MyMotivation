@@ -6,6 +6,8 @@
 
     <color name="lightPrimaryColor">#B2EBF2</color>
 
+    <color name="colorBottomItem">#c9c9c9</color>
+
     <color name="colorText">#FFFFFF</color>
     <color name="colorPrimaryText">#212121</color>
 </resources>

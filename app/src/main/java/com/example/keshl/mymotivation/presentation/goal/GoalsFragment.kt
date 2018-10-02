@@ -1,20 +1,14 @@
 package com.example.keshl.mymotivation.presentation.goal
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBar
 import android.util.Log
 import android.view.*
 import com.example.keshl.mymotivation.R
 import com.example.keshl.mymotivation.presentation.MainActivity
 import com.example.keshl.mymotivation.presentation.common.BaseFragment
-import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.app_bar_main.view.*
-import kotlinx.android.synthetic.main.content_main.*
-import org.jetbrains.anko.act
+import kotlinx.android.synthetic.main.fragment_goals.*
 import javax.inject.Inject
 
 class GoalsFragment : BaseFragment(), GoalsContract.View {
@@ -39,20 +33,26 @@ class GoalsFragment : BaseFragment(), GoalsContract.View {
 
     @SuppressLint("RestrictedApi")
     override fun setupFAB() {
-        var fab: FloatingActionButton = activity!!.fab
-        fab.visibility = View.VISIBLE
-        fab.setImageResource(R.drawable.ic_add_white)
-        fab.setOnClickListener {
+        fabGoal.setImageResource(R.drawable.ic_add_white)
+        fabGoal.setOnClickListener {
             Log.d("TEST", "FAB GOALS FRAGMENT")
             mPresenter.createNewGoal()
         }
     }
 
     override fun setupToolbar() {
+
         setHasOptionsMenu(true)
+        var appCompatActivity = activity as MainActivity?
+        appCompatActivity?.supportActionBar?.setTitle(R.string.goals)
+        appCompatActivity?.enableViews(false)
+
+
+        /*
         actionBar = (activity as MainActivity).supportActionBar!!
         actionBar.setTitle(R.string.goals)
         actionBar.setHomeButtonEnabled(false)
+        */
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
