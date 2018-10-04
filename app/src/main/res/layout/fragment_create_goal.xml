@@ -1,70 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/createGoalSetup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main_layout"
-    android:background="@drawable/bg_top_radius"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    android:fillViewport="true">
 
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_top_radius"
+        android:padding="8dp"
+        tools:layout_editor_absoluteY="25dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/imv_goal_image"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:background="@drawable/bg_empty_view"
+            android:src="@drawable/bg_empty_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_addPhoto"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_add_a_photo_white_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imv_goal_image"
+            app:layout_constraintEnd_toEndOf="@+id/imv_goal_image"
+            app:layout_constraintStart_toStartOf="@+id/imv_goal_image"
+            app:layout_constraintTop_toTopOf="@+id/imv_goal_image" />
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/et_goal_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/imv_goal_image"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:src="@mipmap/goal_image"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginEnd="@dimen/margin_left_right_create_goal"
+            android:layout_marginStart="@dimen/margin_left_right_create_goal"
+            android:layout_marginTop="8dp"
+            android:maxLength="25"
+            app:hintTextAppearance="@style/MyHintText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imv_goal_image">
 
             <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/et_goal_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:hint="@string/goal_title"
-                android:maxLength="25"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imv_goal_image" />
+                android:maxLength="30"
+                android:theme="@style/MyEditText" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/et_goal_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_left_right_create_goal"
+            android:layout_marginStart="@dimen/margin_left_right_create_goal"
+            android:layout_marginTop="8dp"
+            app:hintTextAppearance="@style/MyHintText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_goal_title">
 
             <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/et_goal_description"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="start"
+                android:hint="@string/goal_description"
+                android:maxHeight="200dp"
+                android:theme="@style/MyEditText" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/rl_typeGoal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/et_goal_description"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintStart_toStartOf="@+id/et_goal_description"
+            app:layout_constraintTop_toBottomOf="@+id/et_goal_description">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
+                android:paddingStart="3dp"
+                android:text="@string/type_og_goal"
+                android:textColor="#9f9f9f"
+                android:textSize="19sp"
+                app:layout_constraintEnd_toStartOf="@id/img_type"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/img_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <View
+                android:id="@+id/delimiter1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginStart="2dp"
                 android:layout_marginTop="8dp"
-                android:hint="@string/goal_description"
+                android:background="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/textView2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_goal_title" />
+                app:layout_constraintTop_toBottomOf="@id/img_type" />
 
 
         </android.support.constraint.ConstraintLayout>
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabCreateGoal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="8dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabCreateGoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
 
 
 

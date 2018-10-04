@@ -7,11 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_top_radius">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start"
-        app:layout_constraintStart_toStartOf="parent" />
+
 
 
     <RelativeLayout
@@ -33,7 +29,7 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_goal" />
+            android:src="@drawable/ic_goal_logo" />
 
         <TextView
             android:layout_width="match_parent"
@@ -43,21 +39,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:gravity="center"
+            android:textColor="@color/colorBottomItem"
             android:text="@string/empty_goals_fragment"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
 
     </RelativeLayout>
 
-
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="End"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabGoal"

@@ -13,11 +13,15 @@
     <include layout="@layout/content_main" />
 
         <android.support.design.widget.NavigationView
+            android:background="@drawable/bg_drawer"
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
+            android:paddingTop="10dp"
+            app:itemIconTint="#fff"
+            app:itemTextColor="#fff"
             app:menu="@menu/bottom_navigation_menu" />
 
 </android.support.v4.widget.DrawerLayout>
