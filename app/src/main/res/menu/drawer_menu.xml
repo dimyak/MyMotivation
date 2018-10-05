@@ -4,14 +4,19 @@
     <item
         android:id="@+id/bnv_goals"
         android:icon="@drawable/ic_goal_logo"
-        android:title="@string/goals"/>
+        android:title="@string/goals" />
     <item
         android:id="@+id/bnv_tape"
         android:icon="@drawable/menu_tape"
-        android:title="@string/tape"/>
+        android:title="@string/tape" />
     <item
         android:id="@+id/bnv_favorites"
         android:icon="@drawable/menu_favorites"
-        android:title="@string/favorites"/>
+        android:title="@string/favorites" />
+
+    <item
+        android:id="@+id/bnv_settings"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="@string/settings" />
 
 </menu>

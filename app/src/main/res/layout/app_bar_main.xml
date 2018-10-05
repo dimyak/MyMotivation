@@ -22,6 +22,6 @@
             android:paddingTop="10dp"
             app:itemIconTint="#fff"
             app:itemTextColor="#fff"
-            app:menu="@menu/bottom_navigation_menu" />
+            app:menu="@menu/drawer_menu" />
 
 </android.support.v4.widget.DrawerLayout>
