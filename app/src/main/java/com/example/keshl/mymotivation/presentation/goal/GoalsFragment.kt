@@ -3,33 +3,43 @@ package com.example.keshl.mymotivation.presentation.goal
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.app.ActionBar
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.*
 import com.example.keshl.mymotivation.R
+import com.example.keshl.mymotivation.domain.GoalModel
 import com.example.keshl.mymotivation.presentation.MainActivity
 import com.example.keshl.mymotivation.presentation.common.BaseFragment
+import com.example.keshl.mymotivation.presentation.goal.common.AdapterGoalsList
 import kotlinx.android.synthetic.main.fragment_goals.*
 import javax.inject.Inject
 
 class GoalsFragment : BaseFragment(), GoalsContract.View {
+    private lateinit var mAdapter: AdapterGoalsList
 
-    private lateinit var actionBar: ActionBar
     @Inject
     lateinit var mPresenter: GoalsContract.Presenter
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_goals, container, false)
         mPresenter.onCreateView(this)
         return view
     }
 
+
     override fun onDestroy() {
         mPresenter.onDestroy()
         super.onDestroy()
     }
 
+    override fun initView() {
+        setupRecycler()
+    }
 
+    fun setupRecycler() {
+        mAdapter = AdapterGoalsList(mPresenter)
+        goalsList.layoutManager = LinearLayoutManager(context)
+        goalsList.adapter = mAdapter
+    }
 
     @SuppressLint("RestrictedApi")
     override fun setupFAB() {
@@ -41,18 +51,10 @@ class GoalsFragment : BaseFragment(), GoalsContract.View {
     }
 
     override fun setupToolbar() {
-
         setHasOptionsMenu(true)
         var appCompatActivity = activity as MainActivity?
         appCompatActivity?.supportActionBar?.setTitle(R.string.goals)
         appCompatActivity?.enableViews(false)
-
-
-        /*
-        actionBar = (activity as MainActivity).supportActionBar!!
-        actionBar.setTitle(R.string.goals)
-        actionBar.setHomeButtonEnabled(false)
-        */
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

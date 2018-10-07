@@ -3,10 +3,11 @@ package com.example.keshl.mymotivation
 import android.app.Activity
 import android.app.Application
 import android.content.Context
-import com.example.keshl.mymotivation.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import javax.inject.Inject
 
 class App : Application(), HasActivityInjector{
@@ -22,6 +23,13 @@ class App : Application(), HasActivityInjector{
 
     override fun onCreate() {
         super.onCreate()
+
+        Realm.init(this)
+        val rlConfiguration = RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .name("DATABASE_NAME")
+                .build()
+        Realm.setDefaultConfiguration(rlConfiguration)
 
         DaggerAppComponent.builder()
                 .application(this)

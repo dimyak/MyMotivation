@@ -9,19 +9,21 @@ import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
 import javax.inject.Singleton
 
+
 @Singleton
 @Component(modules = arrayOf(ApplicationModule::class,
         AndroidInjectionModule::class,
         ActivityBuilderModule::class))
-interface AppComponent : AndroidInjector<App>{
+interface AppComponent : AndroidInjector<App> {
 
     @Component.Builder
-    interface Builder{
+    interface Builder {
         @BindsInstance
-        fun application(application:Application):Builder
-        fun build():AppComponent
+        fun application(application: Application): Builder
+
+        fun build(): AppComponent
     }
 
-    override fun inject(app:App)
+    override fun inject(app: App)
 
 }

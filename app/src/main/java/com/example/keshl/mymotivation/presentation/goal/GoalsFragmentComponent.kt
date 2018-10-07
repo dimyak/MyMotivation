@@ -12,18 +12,18 @@ import dagger.android.AndroidInjector
 interface GoalsFragmentComponent : AndroidInjector<GoalsFragment> {
 
     @Subcomponent.Builder
-    abstract class Builder : AndroidInjector.Builder<GoalsFragment>() {}
+    abstract class Builder : AndroidInjector.Builder<GoalsFragment>()
 
     @Module
     class GoalsFragmentModule {
 
         @Provides
-        internal fun provideFavoritesView(fragment: GoalsFragment): GoalsContract.View {
+        internal fun provideGoalsView(fragment: GoalsFragment): GoalsContract.View {
             return fragment
         }
 
         @Provides
-        internal fun provideFavoritesPresenter(presenter: GoalsPresenter): GoalsContract.Presenter {
+        internal fun provideGoalsPresenter(presenter: GoalsPresenter): GoalsContract.Presenter {
             return presenter
         }
 
@@ -33,7 +33,7 @@ interface GoalsFragmentComponent : AndroidInjector<GoalsFragment> {
         }
 
         @Provides
-        internal fun provideEvenDelegate(delegate: GoalsPresenter): GoalsContract.EvenDelegate {
+        internal fun provideEvenDelegate(delegate: GoalsPresenter): GoalsContract.EventListener {
             return delegate
         }
 

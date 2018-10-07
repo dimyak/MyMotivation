@@ -30,7 +30,7 @@ class CreateGoalFragment : BaseFragment(), CreateGoalContract.View {
         initView()
     }
 
-    private fun initView() {
+    override fun initView() {
 
         rl_typeGoal.setOnClickListener {
             var popup: PopupMenu? = null
