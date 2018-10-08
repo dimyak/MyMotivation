@@ -14,15 +14,15 @@ import javax.inject.Singleton
 
 
 @Module(subcomponents = arrayOf(MainActivityComponent::class))
-class ApplicationModule (private val baseApp: App){
-
+class ApplicationModule{
 
     @Singleton
     @Provides
-    @Binds
-    fun provideGoalsMemoryStorage(repository: GoalsMemoryStorage): GoalsRepository {
-        return GoalsDefaultRepository(repository)
+    fun provideContext(application: Application):Context {
+        return application
     }
+
+
 
 }
 

@@ -19,26 +19,32 @@ class GoalsFragment : BaseFragment(), GoalsContract.View {
 
     @Inject
     lateinit var mPresenter: GoalsContract.Presenter
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_goals, container, false)
         mPresenter.onCreateView(this)
         return view
     }
-
-
     override fun onDestroy() {
         mPresenter.onDestroy()
         super.onDestroy()
     }
 
+
     override fun initView() {
         setupRecycler()
     }
+
+
 
     fun setupRecycler() {
         mAdapter = AdapterGoalsList(mPresenter)
         goalsList.layoutManager = LinearLayoutManager(context)
         goalsList.adapter = mAdapter
+    }
+
+    override fun setGoalList(listGoal: List<GoalModel>) {
+        mAdapter.setGoalList(listGoal)
     }
 
     @SuppressLint("RestrictedApi")

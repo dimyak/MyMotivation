@@ -6,7 +6,6 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 import javax.inject.Inject
 import javax.inject.Singleton
-
 @Singleton
 class GoalsDefaultRepository : GoalsRepository {
     private val mMemoryStorage: GoalsMemoryStorage

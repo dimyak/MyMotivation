@@ -1,11 +1,14 @@
 package com.example.keshl.mymotivation.presentation.creategoal
 
 import android.annotation.SuppressLint
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.PopupMenu
 import com.example.keshl.mymotivation.R
+import com.example.keshl.mymotivation.databinding.FragmentCreateGoalBinding
+import com.example.keshl.mymotivation.domain.GoalModel
 import com.example.keshl.mymotivation.presentation.MainActivity
 import com.example.keshl.mymotivation.presentation.common.BaseFragment
 import kotlinx.android.synthetic.main.fragment_create_goal.*
@@ -13,22 +16,28 @@ import javax.inject.Inject
 
 
 class CreateGoalFragment : BaseFragment(), CreateGoalContract.View {
-
+    lateinit var mBinding:FragmentCreateGoalBinding
 
     @Inject
     lateinit var mPresenter: CreateGoalContract.Presenter
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var view = inflater.inflate(R.layout.fragment_create_goal, container, false)
+
+        mBinding  = DataBindingUtil.inflate(inflater ,R.layout.fragment_create_goal,container , false)
+        var myView : View  = mBinding.root
+        mBinding.event = mPresenter
+
+       //
         mPresenter.onCreateView(this)
-        return view
+        return myView
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
     }
+
 
     override fun initView() {
 
@@ -59,6 +68,14 @@ class CreateGoalFragment : BaseFragment(), CreateGoalContract.View {
         }
     }
 
+    override fun getModel(): GoalModel {
+        return GoalModel(mBinding.etTitle.text.toString(), mBinding.etDescription.text.toString())
+    }
+
+    override fun finish() {
+        activity!!.onBackPressed()
+    }
+
 
     override fun onDestroy() {
         mPresenter.onDestroy()
@@ -69,9 +86,7 @@ class CreateGoalFragment : BaseFragment(), CreateGoalContract.View {
     override fun setupFAB() {
 
         fabCreateGoal.setImageResource(R.drawable.ic_save_white)
-        fabCreateGoal.setOnClickListener {
-            Log.d("TEST", "FAB NEW GOALS FRAGMENT")
-        }
+
     }
 
     override fun setupToolbar() {

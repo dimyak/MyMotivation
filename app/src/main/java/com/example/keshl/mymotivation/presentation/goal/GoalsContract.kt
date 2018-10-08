@@ -5,7 +5,10 @@ import com.example.keshl.mymotivation.presentation.common.BasePresenter
 
 interface GoalsContract {
 
-    interface View
+    interface View{
+        fun setGoalList(listGoal:List<GoalModel>)
+    }
+
 
     interface Presenter : BasePresenter<View>, EventListener {
         fun createNewGoal()

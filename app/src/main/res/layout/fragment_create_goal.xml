@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+  >
+
+    <data>
+        <variable
+            name="event"
+            type="com.example.keshl.mymotivation.presentation.creategoal.CreateGoalContract.EventListener" />
+
+    </data>
+
+<ScrollView
     android:id="@+id/createGoalSetup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,8 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_top_radius"
-        android:padding="8dp"
-        tools:layout_editor_absoluteY="25dp">
+        android:padding="8dp">
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/imv_goal_image"
@@ -57,6 +63,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imv_goal_image">
 
             <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/goal_title"
@@ -79,10 +86,12 @@
             app:layout_constraintTop_toBottomOf="@+id/et_goal_title">
 
             <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_description"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="start"
                 android:hint="@string/goal_description"
+
                 android:maxHeight="200dp"
                 android:theme="@style/MyEditText" />
 
@@ -142,11 +151,12 @@
             android:layout_marginBottom="24dp"
             android:layout_marginEnd="8dp"
             android:visibility="visible"
+            android:onClick="@{(v) -> event.onSaveGoal()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
-
+</layout>
 
 

@@ -1,7 +1,10 @@
 package com.example.keshl.mymotivation.presentation.goal
 
+import android.util.Log
 import com.example.keshl.mymotivation.domain.GoalModel
 import com.example.keshl.mymotivation.domain.goals.GoalsInteractor
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class GoalsPresenter : GoalsContract.Presenter, GoalsContract.Router, GoalsContract.EventListener {
@@ -24,6 +27,13 @@ class GoalsPresenter : GoalsContract.Presenter, GoalsContract.Router, GoalsContr
 
     override fun onCreateView(v: GoalsContract.View) {
         mView = v
+        mInteractor.getAllGoals()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    Log.d("DOWNLOAD", it.size.toString())
+                    mView?.setGoalList(it)
+                }
     }
 
     override fun onDestroy() {

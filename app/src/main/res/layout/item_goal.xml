@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_left_right_create_goal"
+        app:cardCornerRadius="8dp"
         android:onClick="@{()->event.onGoalClick(goal)}">
 
         <android.support.constraint.ConstraintLayout
